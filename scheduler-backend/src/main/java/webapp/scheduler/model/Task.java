@@ -45,6 +45,13 @@ public class Task {
 	@Column(name="priority_level")
 	private Integer priorityLevel;
 	
-	@Column(name="work_length")
-	private Integer workLength;
+	@Column(name="course")
+	private String course;
+	
+	@Column(name="people")
+	private String people;
+	
+	@Column(name="related_links")
+	private String relatedLinks;
+	
 }

@@ -1,6 +1,7 @@
 package webapp.scheduler.model.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,6 +24,10 @@ public class TaskDTO {
 	
 	private Integer priorityLevel;
 	
-	private Integer workLength;
+	private String course;
+	
+	private String people;
+	
+	private List<String> relatedLinks;
 	
 }

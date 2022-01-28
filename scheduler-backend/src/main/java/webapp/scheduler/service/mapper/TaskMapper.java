@@ -1,5 +1,6 @@
 package webapp.scheduler.service.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mapstruct.Mapper;
@@ -16,7 +17,8 @@ public interface TaskMapper {
 	
 	@Mappings({
 		@Mapping(source="type.id", target="typeId"),
-		@Mapping(source="type.name", target="typeName")
+		@Mapping(source="type.name", target="typeName"),
+		@Mapping(source="relatedLinks", target="relatedLinks", qualifiedByName="extractLinks")
 	})
 	TaskDTO toDTO(Task task);
 	
@@ -33,6 +35,18 @@ public interface TaskMapper {
 		task.setId(id);
 		
 		return task;
+	}
+	
+	default List<String> extractLinks(String relatedLinks) {
+		
+		String[] links = relatedLinks.split(";");
+		
+		List<String> extractedLinks = new ArrayList<>();
+		for (String link : links) {
+			extractedLinks.add(link);
+		}
+		
+		return extractedLinks;
 	}
 	
 }

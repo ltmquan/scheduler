@@ -63,7 +63,7 @@ export default TaskListElPres;
   > .text-class {
   display: flex;
   align-content: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: row;
 }
 

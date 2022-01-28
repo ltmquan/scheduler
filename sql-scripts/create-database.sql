@@ -22,7 +22,8 @@ create table task (
     description			VARCHAR(100),
     type_id				INT,
     priority_level		INT,
-    work_length			INT,
+    course				VARCHAR(10),
+    people				VARCHAR(50),
     
     PRIMARY KEY(id),
     CONSTRAINT task_type_id 
