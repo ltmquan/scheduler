@@ -9,11 +9,18 @@
     <div class="deadline-class">
       <div class="text-class">{{ task.deadline }}</div>
     </div>
+    <div class="action-class">
+      <div class="text-class">
+        <font-awesome-icon icon="trash" @click.stop="$emit('deleteTask', task.id)" />
+        <font-awesome-icon icon="pencil-alt" @click.stop="$emit('updateTask', task.id)" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 const TaskListElPres = {
+  emits: ['deleteTask', 'updateTask'],
   props: {
     task: Object
   }  
@@ -33,7 +40,7 @@ export default TaskListElPres;
 
 .task-list-el-class 
   > .title-class {
-  width: 50%;
+  width: 30%;
   display: flex;
   align-content: center;
   justify-content: center;
@@ -59,6 +66,15 @@ export default TaskListElPres;
 }
 
 .task-list-el-class 
+  > .action-class {
+  width: 20%;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.task-list-el-class 
   > .priority-level-class
   > .text-class {
   display: flex;
@@ -74,5 +90,22 @@ export default TaskListElPres;
   align-content: center;
   justify-content: flex-end;
   flex-direction: row;
+}
+
+.task-list-el-class 
+  > .action-class
+  > .text-class {
+  display: flex;
+  align-content: center;
+  justify-content: flex-end;
+  flex-direction: row;
+}
+
+.task-list-el-class 
+  > .action-class
+  > .text-class
+  > * {
+  margin: 0 0.5rem;
+  font-size: 1.5rem;
 }
 </style>

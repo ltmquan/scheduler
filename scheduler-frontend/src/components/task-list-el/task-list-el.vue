@@ -1,8 +1,15 @@
 <template>
-  <task-list-el-pres :task="taskInfo" @click="viewTask()" />
+  <task-list-el-pres 
+    :task="taskInfo" 
+    @click="viewTask()"
+    @delete-task="deleteTaskById"
+    @update-task="updateTaskById"
+  />
 </template>
 
 <script>
+import taskService from "../../services/task-service";
+import apiHelper from "../../utils/api-helper";
 import TaskListElPres from "./task-list-el-pres.vue";
 
 const TaskListEl = {
@@ -73,6 +80,19 @@ const TaskListEl = {
       let urgency = priorityLevel * daysLeft;
 
       return urgency;
+    },
+    deleteTaskById(id) {
+      // taskService.deleteById(id).then(
+      //   response => {
+      //     apiHelper.handleResponse(response, (res) => {
+      //       console.log("deleted");
+      //     });
+      //   }
+      // );
+      console.log("deleted " + id);
+    },
+    updateTaskById(id) {
+      this.$router.push(`/task/update/${this.task.id}`);
     }
   },
 }

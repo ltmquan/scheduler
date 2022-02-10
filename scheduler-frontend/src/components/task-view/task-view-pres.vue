@@ -3,7 +3,7 @@
     <div class="task-title-class display-4">{{ task.title }}</div>
     <div class="deadline-class fw-bold">
       <span class="title-class">Deadline: </span>
-      <span class="text-class text-danger">{{ task.deadline}}</span>
+      <span class="text-class text-danger">{{ task.deadline }}</span>
     </div>
     <div class="priority-level-class fw-bold">
       <span class="title-class">Priority level: </span>

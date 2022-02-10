@@ -1,7 +1,7 @@
 <template>
   <div class="task-form-class">
     <div class="title-class display-6">
-      Create new task
+      Task form
     </div>
     <div class="mb-3">
       <label class="form-label">Title</label>
@@ -13,7 +13,7 @@
     </div>
     <div class="mb-3">
       <label class="form-label">Description</label>
-      <textarea rows="3" class="form-control" v-model="task.description" />
+      <textarea rows="5" class="form-control" v-model="task.description" />
     </div>
     <div class="mb-3">
       <label class="form-label">Task Type</label>
@@ -40,7 +40,11 @@
       <label class="form-label">People</label>
       <input type="text" class="form-control" v-model="task.people" />
     </div>
-    <button class="btn btn-primary" @click="$emits('createTask', task)">Create</button>
+    <div class="mb-3">
+      <label class="form-label">Related links</label>
+      <input type="text" class="form-control" v-model="task.relatedLinks" />
+    </div>
+    <button class="btn btn-primary" @click="$emit('createTask', task)">Create</button>
   </div>
 </template>
 

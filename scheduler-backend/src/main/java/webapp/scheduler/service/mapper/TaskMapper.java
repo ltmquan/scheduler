@@ -13,6 +13,9 @@ import webapp.scheduler.model.dto.TaskDTO;
 @Mapper(componentModel="spring")
 public interface TaskMapper {
 
+	@Mappings({
+		@Mapping(source="relatedLinks", target="relatedLinks", qualifiedByName="")
+	})
 	Task toEntity(TaskDTO taskDTO);
 	
 	@Mappings({
@@ -39,7 +42,7 @@ public interface TaskMapper {
 	
 	default List<String> extractLinks(String relatedLinks) {
 		
-		String[] links = relatedLinks.split(";");
+		String[] links = relatedLinks.split(",");
 		
 		List<String> extractedLinks = new ArrayList<>();
 		for (String link : links) {
@@ -47,6 +50,18 @@ public interface TaskMapper {
 		}
 		
 		return extractedLinks;
+	}
+	
+	default String mergeLinks(List<String> relatedLinks) {
+		
+		StringBuilder mergedLinks = new StringBuilder();
+		
+		for (String link : relatedLinks) {
+			mergedLinks.append(link);
+			mergedLinks.append(",");
+		}
+		
+		return mergedLinks.substring(0, mergedLinks.length()-1);
 	}
 	
 }

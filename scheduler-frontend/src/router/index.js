@@ -4,6 +4,7 @@ import { createWebHistory, createRouter } from "vue-router";
 const TASK_PAGE = () => import("../components/task-page/task-page.vue");
 const TASK_VIEW_PAGE = () => import("../components/task-view/task-view.vue");
 const TASK_CREATE_PAGE = () => import("../components/task-form/task-form.vue");
+const TASK_UPDATE_PAGE = () => import("../components/task-form/task-form.vue");
 /* END OF LAZY-LOAD */
 
 const routes = [
@@ -22,6 +23,11 @@ const routes = [
     path: "/task/create",
     name: "TASK_CREATE",
     component: TASK_CREATE_PAGE
+  },
+  {
+    path: "/task/update/:id",
+    name: "TASK_UPDATE",
+    component: TASK_UPDATE_PAGE
   }
 ];
 
