@@ -1,8 +1,11 @@
 <template>
-  <task-page-pres :task-list="taskList" />
+  <task-page-pres :task-list="taskList" @create-task="createTask()" />
 </template>
 
 <script>
+import taskService from "../../services/task-service";
+import apiHelper from "../../utils/api-helper";
+
 import TaskPagePres from "./task-page-pres.vue";
 
 const TaskPage = {
@@ -11,7 +14,19 @@ const TaskPage = {
   },
   data() {
     return {
-      taskList: [
+      taskList: null,
+    };
+  },
+  methods: {
+    loadTaskList() {
+      // taskService.findAll().then(
+      //   response => {
+      //     apiHelper.handleResponse(response, (res) => {
+      //       this.taskList = res.body;
+      //     });
+      //   }
+      // );
+      this.taskList = [
         {
           id: 1,
           title: "Task 1",
@@ -42,9 +57,15 @@ const TaskPage = {
           deadline: new Date("02/20/2022"),
           priorityLevel: 1,
         },
-      ],
-    };
+      ]
+    },
+    createTask() {
+      this.$router.push(`/task/create`);
+    }
   },
+  created() {
+    this.loadTaskList();
+  }
 }
 
 export default TaskPage;

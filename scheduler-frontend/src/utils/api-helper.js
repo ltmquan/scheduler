@@ -1,4 +1,5 @@
 import axios from "axios";
+import { STATUS_ERROR, STATUS_OK } from "../constants/API";
 
 class APIHelper {
   sendGetRequest(url) {
@@ -39,6 +40,14 @@ class APIHelper {
           return response.data;
         }
       );
+  }
+
+  handleResponse(response, successCallback = (param) => {}, errorCallback = (param) => {}) {
+    if (response.status && response.status == STATUS_OK) {
+      successCallback(response);
+    } else if (response.status && response.status == STATUS_ERROR) {
+      errorCallback(response);
+    }
   }
 }
 

@@ -19,7 +19,7 @@ const TaskListEl = {
   },
   methods: {
     viewTask() {
-      this.$router.push(`/task/${this.task.id}`);
+      this.$router.push(`/task/view/${this.task.id}`);
     },
     toTaskInfo(task) {
       return {
@@ -71,19 +71,8 @@ const TaskListEl = {
       let daysLeft = parseInt(diff/(1000 * 3600 * 24));
 
       let urgency = priorityLevel * daysLeft;
-      let urgencyMessage = "";
 
-      if (urgency == 0) {
-        urgencyMessage = "IT'S TADAAYYY!!!";
-      } else if (urgency < 6) {
-        urgencyMessage = "Pretty frickin' near the date, don't you think?";
-      } else if (urgency < 16) {
-        urgencyMessage = "Still got plenty of time"; 
-      } else {
-        urgencyMessage = "Lates";
-      }
-
-      return urgencyMessage;
+      return urgency;
     }
   },
 }

@@ -1,36 +1,38 @@
 <template>
   <div class="task-view-class">
-    <div class="title-class display-4">Task title</div>
+    <div class="task-title-class display-4">{{ task.title }}</div>
     <div class="deadline-class fw-bold">
-      Deadline:
-      <span class="text-class text-danger">01/30/2022 - 2 day(s) left</span>
+      <span class="title-class">Deadline: </span>
+      <span class="text-class text-danger">{{ task.deadline}}</span>
     </div>
     <div class="priority-level-class fw-bold">
-      Priority level:
-      <span class="text-class text-success">Mildly important</span>
+      <span class="title-class">Priority level: </span>
+      <span class="text-class text-success">{{ task.priorityLevel }}</span>
     </div>
     <div class="description-class">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum magnam nam
-      quas odit alias assumenda amet sint in esse perspiciatis quo ut, dolorum
-      autem quos id animi incidunt quisquam impedit doloremque. Ex, dolorem
-      libero consectetur quis voluptate sint perspiciatis inventore incidunt
-      mollitia aperiam quidem aliquam dolore, voluptas dolor iure cupiditate.
+      {{ task.description }}
     </div>
     <div class="type-class">
-      Type: Coursework
+      <span class="title-class">Type: </span>
+      <span class="text-class">{{ task.typeName }}</span>
     </div>
     <div class="course-class">
-      Course: CSC 280
+      <span class="title-class">Course: </span>
+      <span class="text-class">{{ task.course }}</span>
     </div>
     <div class="people-class">
-      People: Duong xinh
+      <span class="title-class">People: </span>
+      <span class="text-class">{{ task.people }}</span>
     </div>
     <div class="related-links-class">
-      <div class="link-class">
-        <a href="something">something.com</a>
-      </div>
-      <div class="link-class">
-        <a href="somethingelse">somethingelse.com</a>
+      <span class="title-class">Related links: </span>
+      <div
+        v-for="link in task.relatedLinks"
+        :key="link"
+        class="link-class"
+      >
+        &nbsp;&nbsp;-&nbsp;&nbsp;
+        <a :href="link">{{ link }}</a>
       </div>
     </div>
   </div>
@@ -38,11 +40,9 @@
 
 <script>
 const TaskViewPres = {
-  data() {
-    return {
-      id: this.$route.params.id,
-    };
-  },
+  props: {
+    task: Object
+  }
 };
 
 export default TaskViewPres;
@@ -57,5 +57,11 @@ export default TaskViewPres;
 
 .task-view-class > * {
   padding: 0.5rem 0;
+}
+
+.task-view-class 
+  > *
+  > .title-class {
+  font-weight: bold;
 }
 </style>

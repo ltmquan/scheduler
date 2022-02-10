@@ -1,7 +1,12 @@
 <template>
   <div class="task-page-class">
-    <div class="page-title-class display-6">Task List</div>
-    <task-list :task-list="taskList" />
+    <div class="page-title-class display-6">
+      Task List
+      <span class="add-btn-class btn btn-outline-dark" @click="$emit('createTask')">
+        <font-awesome-icon icon="plus" />
+      </span>
+    </div>
+    <task-list v-if="taskList" :task-list="taskList" />
   </div>
 </template>
 
@@ -12,6 +17,7 @@ const TaskPagePres = {
   components: {
     TaskList
   },
+  emits: ['createTask'],
   props: {
     taskList: Array
   }
@@ -29,6 +35,11 @@ export default TaskPagePres;
 
 .task-page-class
   > .page-title-class {
-  margin: 0.2rem;
+  margin: 0.5rem;
+}
+
+.add-btn-class {
+  margin: 0 0.2rem;
+  border-radius: 50%;
 }
 </style>
