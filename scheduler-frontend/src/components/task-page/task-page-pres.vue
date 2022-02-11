@@ -6,7 +6,8 @@
         <font-awesome-icon icon="plus" />
       </span>
     </div>
-    <task-list v-if="taskList" :task-list="taskList" />
+    <task-list v-if="taskList && taskList.length > 0" :task-list="taskList" />
+    <div v-else>No task right now! Wow, so free!</div>
   </div>
 </template>
 

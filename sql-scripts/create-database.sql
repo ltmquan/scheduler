@@ -24,6 +24,7 @@ create table task (
     priority_level		INT,
     course				VARCHAR(10),
     people				VARCHAR(50),
+    related_links		VARCHAR(200),
     
     PRIMARY KEY(id),
     CONSTRAINT task_type_id 

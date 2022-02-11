@@ -83,23 +83,13 @@ const TaskForm = {
       }
     },
     loadTypeList() {
-      // taskTypeService.findAll().then(
-      //   response => {
-      //     apiHelper.handleResponse(response, (res) => {
-      //       this.typeList = res.body;
-      //     });
-      //   }
-      // );
-      this.typeList = [
-        {
-          id: 1,
-          name: "Coursework"
-        },
-        {
-          id: 2,
-          name: "PhD Work"
+      taskTypeService.findAll().then(
+        response => {
+          apiHelper.handleResponse(response, (res) => {
+            this.typeList = res.body;
+          });
         }
-      ]
+      );
     },
   },
   created() {

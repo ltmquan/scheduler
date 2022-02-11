@@ -22,7 +22,7 @@ class CommonHelper {
   }
 
   calcUrgency(priorityLevel, deadline) {
-    daysLeft = this.calcTimeRemaining(deadline);
+    let daysLeft = this.calcTimeRemaining(deadline);
 
     return daysLeft * priorityLevel;
   }
