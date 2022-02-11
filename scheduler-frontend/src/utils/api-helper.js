@@ -1,5 +1,5 @@
 import axios from "axios";
-import { STATUS_ERROR, STATUS_OK } from "../constants/API";
+import { STATUS_ERROR, STATUS_OK } from "../constants/API-constants";
 
 class APIHelper {
   sendGetRequest(url) {

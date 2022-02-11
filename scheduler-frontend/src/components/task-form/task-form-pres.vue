@@ -44,13 +44,13 @@
       <label class="form-label">Related links</label>
       <input type="text" class="form-control" v-model="task.relatedLinks" />
     </div>
-    <button class="btn btn-primary" @click="$emit('createTask', task)">Create</button>
+    <button class="btn btn-primary" @click="$emit('submitTask', task)">Submit</button>
   </div>
 </template>
 
 <script>
 const TaskFormPres = {
-  emits: ['createTask'],
+  emits: ['submitTask'],
   props: {
     task: Object,
     typeList: Array

@@ -10,6 +10,9 @@
 <script>
 import taskService from "../../services/task-service";
 import apiHelper from "../../utils/api-helper";
+import commonHelper from "../../utils/common-helper";
+import { PRIORITY_LEVEL_STRING } from "../../constants/task-constants";
+
 import TaskListElPres from "./task-list-el-pres.vue";
 
 const TaskListEl = {
@@ -32,54 +35,9 @@ const TaskListEl = {
       return {
         id: task.id,
         title: task.title,
-        deadline: this.calcTimeUntilDeadline(task.deadline),
-        urgency: this.calcPriority(task.priorityLevel)
+        deadline: commonHelper.calcTimeRemaining(task.deadline),
+        urgency: PRIORITY_LEVEL_STRING[task.priorityLevel]
       }
-    },
-    calcTimeUntilDeadline(deadline) {
-      let today = new Date();
-
-      let diff = Math.abs(deadline.getTime() - today.getTime());
-
-      let daysLeft = parseInt(diff/(1000 * 3600 * 24));
-
-      return `${daysLeft} day(s) left`;
-    },
-    calcPriority(priorityLevel) {
-      let priority = "";
-
-      switch (priorityLevel) {
-      case 1:
-        priority = "Pretty frickin' important";
-        break;
-
-      case 2:
-        priority = "Somewhat important";
-        break;
-
-      case 3:
-        priority = "Mildly important";
-        break;
-
-      case 4:
-        priority = "On the chill side";
-        break;
-
-      case 5:
-        priority = "Writings' level of importance";
-        break;
-      }
-
-      return priority;
-    },
-    calcUrgency(priorityLevel, deadline) {
-      let today = new Date();
-      let diff = Math.abs(deadline.getTime() - today.getTime());
-      let daysLeft = parseInt(diff/(1000 * 3600 * 24));
-
-      let urgency = priorityLevel * daysLeft;
-
-      return urgency;
     },
     deleteTaskById(id) {
       // taskService.deleteById(id).then(

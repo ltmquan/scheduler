@@ -2,7 +2,7 @@
   <task-form-pres v-if="task && typeList" 
     :task="task" 
     :type-list="typeList"
-    @create-task="createTask" 
+    @submit-task="submitTask" 
   />
 </template>
 
@@ -10,6 +10,7 @@
 import taskService from "../../services/task-service";
 import taskTypeService from "../../services/task-type-service";
 import apiHelper from "../../utils/api-helper";
+import commonHelper from "../../utils/common-helper";
 
 import TaskFormPres from "./task-form-pres.vue";
 
@@ -24,15 +25,31 @@ const TaskForm = {
     };
   },
   methods: {
-    createTask(task) {
-      // taskService.create(task).then(
-      //   response => {
-      //     apiHelper.handleResponse(response, (res) => {
-      //       console.log(res);
-      //     });
-      //   }
-      // );
-      console.log(task);
+    submitTask(task) {
+      if (!Array.isArray(task.relatedLinks)) {
+        task.relatedLinks = commonHelper.extractLinks(task.relatedLinks);
+      }
+      if (task.id) {
+        // taskService.update(task).then(
+        //   response => {
+        //     apiHelper.handleResponse(response, (res) => {
+        //       console.log(res);
+        //     });
+        //   }
+        // );
+        console.log("update");
+        console.log(task);
+      } else {
+        // taskService.create(task).then(
+        //   response => {
+        //     apiHelper.handleResponse(response, (res) => {
+        //       console.log(res);
+        //     });
+        //   }
+        // );
+        console.log("create");
+        console.log(task);
+      }
     },
     loadTask() {
       let taskId = this.$route.params.id;
@@ -83,7 +100,7 @@ const TaskForm = {
           name: "PhD Work"
         }
       ]
-    }
+    },
   },
   created() {
     this.loadTask();

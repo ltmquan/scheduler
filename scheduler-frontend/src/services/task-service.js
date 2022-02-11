@@ -1,4 +1,4 @@
-import { TASK_API_URL } from "../constants/API";
+import { TASK_API_URL } from "../constants/API-constants";
 import apiHelper from "../utils/api-helper";
 
 const API_URL = TASK_API_URL;
