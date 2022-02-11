@@ -5,7 +5,7 @@
     </div>
     <div class="mb-3">
       <label class="form-label">Title</label>
-      <input type="text" class="form-control" v-model="task.title" />
+      <input type="text" class="form-control" v-model="task.title" autofocus />
     </div>
     <div class="mb-3">
       <label class="form-label">Deadline</label>
