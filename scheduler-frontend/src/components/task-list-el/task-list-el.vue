@@ -35,7 +35,7 @@ const TaskListEl = {
       return {
         id: task.id,
         title: task.title,
-        deadline: commonHelper.calcTimeRemaining(task.deadline),
+        deadline: commonHelper.getTimeRemainingString(task.deadline),
         urgency: PRIORITY_LEVEL_STRING[task.priorityLevel]
       }
     },
