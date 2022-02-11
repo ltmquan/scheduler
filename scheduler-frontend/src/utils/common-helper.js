@@ -10,7 +10,7 @@ class CommonHelper {
   }
 
   getTimeRemainingString(deadline) {
-    daysLeft = this.calcTimeRemaining(deadline);
+    let daysLeft = this.calcTimeRemaining(deadline);
 
     if (daysLeft == 0) {
       return "IT'S TADAYYYY!!!!";
