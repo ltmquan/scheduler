@@ -2,7 +2,14 @@ class CommonHelper {
   calcTimeRemaining(deadline) {
     let today = new Date();
 
-    let diff = Math.abs(deadline.getTime() - today.getTime());
+    let deadlineTime;
+    if (typeof(deadline) == "string") {
+      deadlineTime = Date.parse(deadline);
+    } else {
+      deadlineTime = deadline.getTime();
+    }
+
+    let diff = Math.abs(deadlineTime - today.getTime());
 
     let daysLeft = parseInt(diff/(1000 * 3600 * 24));
 
@@ -28,9 +35,12 @@ class CommonHelper {
   }
 
   extractLinks(mergedLinks) {
-    let relatedLinks = mergedLinks.split(",");
+    if (mergedLinks) {
+      let relatedLinks = mergedLinks.split(",");
 
-    return relatedLinks
+      return relatedLinks;
+    }
+    return [];
   }
 }
 

@@ -30,52 +30,35 @@ const TaskForm = {
         task.relatedLinks = commonHelper.extractLinks(task.relatedLinks);
       }
       if (task.id) {
-        // taskService.update(task).then(
-        //   response => {
-        //     apiHelper.handleResponse(response, (res) => {
-        //       console.log(res);
-        //     });
-        //   }
-        // );
-        console.log("update");
-        console.log(task);
+        taskService.update(task).then(
+          response => {
+            apiHelper.handleResponse(response, (res) => {
+              console.log(res);
+              this.$router.push('/');
+            });
+          }
+        );
       } else {
-        // taskService.create(task).then(
-        //   response => {
-        //     apiHelper.handleResponse(response, (res) => {
-        //       console.log(res);
-        //     });
-        //   }
-        // );
-        console.log("create");
-        console.log(task);
+        taskService.create(task).then(
+          response => {
+            apiHelper.handleResponse(response, (res) => {
+              console.log(res);
+              this.$router.push('/');
+            });
+          }
+        );
       }
     },
     loadTask() {
       let taskId = this.$route.params.id;
       if (taskId) {
-        // taskService.findById(taskId).then(
-        //   response => {
-        //     apiHelper.handleResponse(response, (res) => {
-        //       this.task = res.body;
-        //     });
-        //   }
-        // );
-        this.task = {
-        id: 1,
-        title: "Task title",
-        deadline: '2022-02-15',
-        priorityLevel: 3,
-        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum magnam nam quas odit alias assumenda amet sint in esse perspiciatis quo ut, dolorum autem quos id animi incidunt quisquam impedit doloremque. Ex, dolorem libero consectetur quis voluptate sint perspiciatis inventore incidunt mollitia aperiam quidem aliquam dolore, voluptas dolor iure cupiditate.",
-        typeId: 1,
-        typeName: "Coursework",
-        course: "CSC 280",
-        people: "Duong xinh",
-        relatedLinks: [
-          "something.com",
-          "somethingelse.com"
-        ]
-      }
+        taskService.findById(taskId).then(
+          response => {
+            apiHelper.handleResponse(response, (res) => {
+              this.task = res.body;
+            });
+          }
+        );
       } else {
         this.task = {
           id: null

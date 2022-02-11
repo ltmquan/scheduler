@@ -6,6 +6,7 @@ import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
+import org.mapstruct.Named;
 
 import webapp.scheduler.model.Task;
 import webapp.scheduler.model.dto.TaskDTO;
@@ -14,7 +15,7 @@ import webapp.scheduler.model.dto.TaskDTO;
 public interface TaskMapper {
 
 	@Mappings({
-		@Mapping(source="relatedLinks", target="relatedLinks", qualifiedByName="")
+		@Mapping(source="relatedLinks", target="relatedLinks", qualifiedByName="mergeLinks")
 	})
 	Task toEntity(TaskDTO taskDTO);
 	
@@ -40,6 +41,7 @@ public interface TaskMapper {
 		return task;
 	}
 	
+	@Named("extractLinks")
 	default List<String> extractLinks(String relatedLinks) {
 		
 		String[] links = relatedLinks.split(",");
@@ -49,9 +51,10 @@ public interface TaskMapper {
 			extractedLinks.add(link);
 		}
 		
-		return extractedLinks;
+		return relatedLinks.length() == 0 ? new ArrayList<>() : extractedLinks;
 	}
 	
+	@Named("mergeLinks")
 	default String mergeLinks(List<String> relatedLinks) {
 		
 		StringBuilder mergedLinks = new StringBuilder();
@@ -61,7 +64,7 @@ public interface TaskMapper {
 			mergedLinks.append(",");
 		}
 		
-		return mergedLinks.substring(0, mergedLinks.length()-1);
+		return mergedLinks.length() == 0 ? "" : mergedLinks.substring(0, mergedLinks.length()-1);
 	}
 	
 }

@@ -11,8 +11,10 @@ import webapp.scheduler.constants.API;
 import webapp.scheduler.constants.Database;
 import webapp.scheduler.constants.Messages;
 import webapp.scheduler.model.Task;
+import webapp.scheduler.model.TaskType;
 import webapp.scheduler.model.dto.TaskDTO;
 import webapp.scheduler.repository.TaskRepository;
+import webapp.scheduler.repository.TaskTypeRepository;
 import webapp.scheduler.service.TaskService;
 import webapp.scheduler.service.mapper.TaskMapper;
 
@@ -21,6 +23,9 @@ public class TaskServiceImpl implements TaskService {
 
 	@Autowired
 	TaskRepository taskRepository;
+	
+	@Autowired
+	TaskTypeRepository taskTypeRepository;
 	
 	@Autowired
 	TaskMapper taskMapper;
@@ -75,7 +80,17 @@ public class TaskServiceImpl implements TaskService {
 					API.POST_REQUEST, Database.ENTITY_TASK);
 		}
 		
+		Optional<TaskType> typeOptional = taskTypeRepository.findById(taskDTO.getTypeId());
+		if (!typeOptional.isPresent()) {
+			throw new InvalidAPICallException(
+					Messages.ERROR_REQUESTED_DATA_DOES_NOT_EXIST, 
+					API.GET_REQUEST, Database.ENTITY_TASK_TYPE);
+		}
+		TaskType type = typeOptional.get();
+		
 		Task task = taskMapper.toEntity(taskDTO);
+		task.setType(type);
+		
 		Task createdTask = taskRepository.save(task);
 		
 		TaskDTO createdTaskDTO = taskMapper.toDTO(createdTask);

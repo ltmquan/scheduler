@@ -40,17 +40,16 @@ const TaskListEl = {
       }
     },
     deleteTaskById(id) {
-      // taskService.deleteById(id).then(
-      //   response => {
-      //     apiHelper.handleResponse(response, (res) => {
-      //       console.log("deleted");
-      //     });
-      //   }
-      // );
-      console.log("deleted " + id);
+      taskService.deleteById(id).then(
+        response => {
+          apiHelper.handleResponse(response, (res) => {
+            console.log("deleted");
+          });
+        }
+      );
     },
     updateTaskById(id) {
-      this.$router.push(`/task/update/${this.task.id}`);
+      this.$router.push(`/task/update/${id}`);
     }
   },
 }
